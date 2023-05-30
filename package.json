@@ -4,5 +4,6 @@
   "main": "index.ts",
   "repository": "git@github.com:HaiBV/ts-practice.git",
   "author": "HaiBV <buivuhai.bk@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
