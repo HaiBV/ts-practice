@@ -1,21 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import FormGroup from "react-bootstrap/FormGroup";
+import FormControl from "react-bootstrap/FormControl";
 
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { updatePlayerScore, selectScoreboard } from "./scoreboardSlice";
+import { addPlayer, updatePlayerScore, selectScoreboard, Player } from "./scoreboardSlice";
 import "./scoreboard.css";
-
-interface Player {
-  id: number;
-  name: string;
-  score: number;
-}
 
 const ScoreBoard: React.FC = () => {
   const { players } = useAppSelector(selectScoreboard);
+  const [newPlayerName, setNewPlayerName] = useState<string>("");
   const dispatch = useAppDispatch();
 
   return (
@@ -61,6 +59,20 @@ const ScoreBoard: React.FC = () => {
               </Row>
             ))}
           </div>
+          <Row className="add-player">
+            <Form
+              onSubmit={(e) => {
+								e.preventDefault();
+                setNewPlayerName("");
+                dispatch(addPlayer({ id: Math.max(...players.map(player => player.id)) + 1, name: newPlayerName, score: Math.floor(Math.random() * 9) + 1 }));
+              }}
+            >
+              <FormGroup>
+                <FormControl type="text" placeholder="Enter player name" value={newPlayerName} onChange={(e) => setNewPlayerName(e.target.value)} />
+                <Button type="submit">Add Player</Button>
+              </FormGroup>
+            </Form>
+          </Row>
         </Container>
       </section>
     </Container>
