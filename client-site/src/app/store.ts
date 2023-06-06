@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
-import scoreboardReducer from "../pages/ScoreBoard/scoreboardSlice";
+import scoreboardReducer from "pages/ScoreBoard/scoreboardSlice";
 
 export const store = configureStore({
   reducer: {

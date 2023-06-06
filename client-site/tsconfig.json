@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+		"baseUrl": ".",
+    "paths": {
+      "src/*": ["./src/*"],
+      "components/*": ["./src/components/*"], // with vite, this configs for vscode intellisense only
+      "pages/*": ["./src/pages/*"]
+    },
+
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
