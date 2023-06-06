@@ -1,10 +1,9 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
-import scoreboardReducer from "pages/ScoreBoard/scoreboardSlice";
+
+import rootReducer from './rootReducer';
 
 export const store = configureStore({
-  reducer: {
-    scoreboard: scoreboardReducer,
-  },
+  reducer: rootReducer,
 })
 
 export type AppDispatch = typeof store.dispatch

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import initPlayers from "../../data/players";
+import { RootState } from "src/setup/store";
+import initPlayers from "src/data/players";
 
 export interface Player {
   id: number;

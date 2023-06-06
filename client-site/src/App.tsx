@@ -1,12 +1,12 @@
-import ScoreBoard from './pages/ScoreBoard/ScoreBoard';
-import './App.css'
+import ScoreBoard from "src/features/scoreboard/ScoreBoard";
+import "./App.css";
 
 function App() {
   return (
     <>
-			<ScoreBoard />
+      <ScoreBoard />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -7,9 +7,9 @@ import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/FormGroup";
 import FormControl from "react-bootstrap/FormControl";
 
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { addPlayer, updatePlayerScore, selectScoreboard, Player } from "./scoreboardSlice";
-import "./scoreboard.css";
+import { useAppSelector, useAppDispatch } from "src/hooks/useRedux";
+import { addPlayer, updatePlayerScore, selectScoreboard, Player } from "./scoreBoardSlice";
+import "./score-board.css";
 
 const ScoreBoard: React.FC = () => {
   const { players } = useAppSelector(selectScoreboard);
