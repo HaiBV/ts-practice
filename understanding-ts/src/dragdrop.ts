@@ -1,7 +1,17 @@
+// Project type
+enum ProjectStatus {
+  Active = "active",
+  Finished = "finished",
+}
+class Project {
+  constructor(public id: string, public title: string, public description: string, public people: number, public status: ProjectStatus) {}
+}
+
 // Project state management
+type Listener = (items: Project[]) => void;
 class ProjectState {
-  private listener: any[] = [];
-  private projects: any[] = [];
+  private listener: Listener[] = [];
+  private projects: Project[] = [];
   private static instance: ProjectState;
 
   private constructor() {}
@@ -16,12 +26,7 @@ class ProjectState {
   }
 
   addProject(title: string, description: string, people: number) {
-    const newProject = {
-      id: Math.random().toString(),
-      title,
-      description,
-      people,
-    };
+    const newProject = new Project(Math.random().toString(), title, description, people, ProjectStatus.Active);
 
     this.projects.push(newProject);
 
@@ -30,7 +35,7 @@ class ProjectState {
     }
   }
 
-  addListener(listenerFn: Function) {
+  addListener(listenerFn: Listener) {
     this.listener.push(listenerFn);
   }
 }
@@ -91,20 +96,21 @@ class ProjectList {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
   element: HTMLElement;
-  assignedProjects: any[];
+  assignedProjects: Project[];
 
-  constructor(private type: "active" | "finished") {
+  constructor(private type: ProjectStatus) {
     this.templateElement = document.getElementById("project-list")! as HTMLTemplateElement;
     this.hostElement = document.getElementById("app")! as HTMLDivElement;
-		this.assignedProjects = [];
+    this.assignedProjects = [];
 
     const importNode = document.importNode(this.templateElement.content, true);
 
     this.element = importNode.firstElementChild as HTMLFormElement;
     this.element.id = `${this.type}-projects`;
 
-    projectState.addListener((projects: any[]) => {
-      this.assignedProjects = projects;
+    projectState.addListener((projects: Project[]) => {
+      const relevantProjects = projects.filter((proj) => proj.status === this.type);
+      this.assignedProjects = relevantProjects;
       this.renderProjects();
     });
 
@@ -114,10 +120,11 @@ class ProjectList {
 
   private renderProjects() {
     const listEl = document.getElementById(`${this.type}-projects-list`)! as HTMLUListElement;
+    listEl.innerHTML = "";
     for (const projItem of this.assignedProjects) {
       const listItem = document.createElement("li");
       listItem.textContent = projItem.title;
-      listEl?.appendChild(listItem);
+      listEl.appendChild(listItem);
     }
   }
 
@@ -204,6 +211,6 @@ class ProjectInput {
   }
 }
 
-const activeProjList = new ProjectList("active");
-const finishedProjList = new ProjectList("finished");
+const activeProjList = new ProjectList(ProjectStatus.Active);
+const finishedProjList = new ProjectList(ProjectStatus.Finished);
 const projInput = new ProjectInput();
