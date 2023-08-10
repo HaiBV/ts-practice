@@ -57,7 +57,7 @@ class ProjectInput {
         this.hostElement.insertAdjacentElement("afterbegin", this.element);
     }
 }
+exports.default = ProjectInput;
 __decorate([
     utils_1.autobind
 ], ProjectInput.prototype, "submitHandler", null);
-exports.default = ProjectInput;
