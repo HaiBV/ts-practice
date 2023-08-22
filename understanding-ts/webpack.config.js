@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/dragdrop.ts',
+  entry: './src/app.ts',
   devServer: {
     static: [
       {
