@@ -8,7 +8,8 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/app.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\""
+    "server": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\"",
+    "dev": "concurrently \"npm run server\""
   },
   "dependencies": {
     "dotenv": "^16.3.1",
